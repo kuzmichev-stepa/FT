@@ -25,4 +25,4 @@ def test_guest_should_see_login_page(browser):
     login_page.should_be_login_page()
     
 if __name__ == "__main__":
-   pytest.main()
+    pytest.main()
