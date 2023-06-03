@@ -1,8 +1,6 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
 
-###todo вынести определение имени и цены в отдельный метод до добавления в корзину
-
 class ProductPage(BasePage):    
     def add_product_to_basket(self):
         btn_add_to_basket = self.browser.find_element(*ProductPageLocators.BTN_ADD_TO_BASKET)
@@ -23,3 +21,11 @@ class ProductPage(BasePage):
         book_price_in_message = (self.browser.find_element(*ProductPageLocators.BOOK_PRICE_IN_MESSAGE)).text
         assert book_price_on_page == book_price_in_message, \
             f"Price in confirm message - '{book_price_in_message}', instead '{book_price_on_page}'"
+    
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE),\
+            "Success message is presented, but should not be"
+    
+    def should_be_disappeared_success_message(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE),\
+            "Success message isn't disappeared, but should be"
